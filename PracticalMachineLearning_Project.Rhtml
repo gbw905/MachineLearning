@@ -27,15 +27,17 @@ set.seed(1234)
 end.rcode-->
 <h2>2.0 Data</h2>
 <h3>2.1 Data Sources</h3>
-<p>The 'Human Activity Recognition' (HAR) group has kindly provided the data for this project. You can read more details about this group on their <a href="http://groupware.les.inf.puc-rio.br/har">website</a>. We will load the two files, 'training' and 'testing'. Note that the 'test' file provided is intended for a test by an external party (what software developers typically call an 'acceptanct' test) and that we still need to partion the 'training' data into 'train' and'tes' partitions so that we can use the 'test' partition for our own test -- what developers commonly call a 'unit test'.</p>
+<p>The 'Human Activity Recognition' (HAR) group has kindly provided the data for this project. You can read more details about this group on their <a href="http://groupware.les.inf.puc-rio.br/har">website</a>. We will load the two files, 'training' and 'testing'. Note that the 'test' file provided is intended for a test by an external party (what software developers typically call an 'acceptanct' test) and that we still need to partion the 'training' data into 'train' and'test' partitions so that we can use the 'test' partition for our own test -- what developers commonly call a 'unit test'.</p>
 <!--begin.rcode
 trainUrl <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
 testUrl <- "http://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
 train <- read.csv(url(trainUrl), na.strings=c("NA","#DIV/0!",""))
 test <- read.csv(url(testUrl), na.strings=c("NA","#DIV/0!",""))
 end.rcode-->
-<h3>2.2 Partition the Training Dataset</h3>
-<p>Assumption: The 'pml-testing.csv' file has been provided by an external source, to validate the analysis with a specific set of twenty test cases. Here, I partition to the 'pml-training.csv' file to create the file 'train' and 'test' files that I will use as part of developing the analysis.</p>
+<h3>2.2 Partition the Training Dataset for Cross-Validation</h3>
+<p>Here, I partition to the 'pml-training.csv' file to create the file 'train' and 'test' files that I will use as part of developing the analysis. This technique is called 'cross-validation'.</p>
+<p>Cross-validation is a statistical technique to estimate the prediction error rate by splitting the data into training and test datasets. A prediction model is obtained using the training set, while the test set is held for empirical error estimation.</p>
+<p>Unlike the 'statistical analysis' and 'Regression' courses in the Data Science certificate program, where we calculated the confidence interval using the same dataset we used to calculate the model, the confusion-matrix that we will calculate below, will use the 'test' data that we partition from the pml-training.csv file (and do NOT use in calculating the model) to evaluate the accuracy range for the prediction models.</p>
 <!--begin.rcode
 inTrain <- createDataPartition(y=train$classe, p=0.6, list=FALSE)
 myTrain <- train[inTrain,]; myTest <- train[-inTrain,]
