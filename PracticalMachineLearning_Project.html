@@ -117,9 +117,9 @@
 </pre></div>
 </div></div>
 <h3>2.3 Clean Training Data Partition</h3>
-<p>The device vendors did create their device log files with the intent of supplying data just to R analysis programs. As a result, we will have to 'clean' the data before we can analyze it. 'Cleaning' performs multiple functions:<ul>
-<li>Step-1 - Remove variables that cannot aid in categorizing activity performance because they have too little variance from one observation to the next
-<li>Step-2 - Remove variables that could have an accidental corelation
+<p>The device vendors did not create their device log files with the intent of supplying data just to R analysis programs. As a result, we will have to 'clean' the data before we can analyze it. 'Cleaning' performs multiple functions:<ul>
+<li>Step-1 - Remove variables that cannot aid in categorizing activity performance because they do not vary from one observation to the next
+<li>Step-2 - Remove variables whose corelation can only be accidental, and would have no meaning
 <li>Step-3 - Remove variables that a majority of users do not collect, and that would therefore not provide a useful basis for categorizing future users going forward</ul>
 <p>Since this report will be publicly available on GitHub, we would also remove any personal identifying attributes (PIA), but the HAR group has already done that for us.</p>
 <p><u>Step-1: Remove NearZeroVariance variables</u><br>'Near Zero Variance variables' add nothing to the analysis because they did not change over the data collection period.</p>
